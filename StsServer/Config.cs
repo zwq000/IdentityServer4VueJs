@@ -79,36 +79,35 @@ namespace StsServerIdentity {
                             "email"
                             }
                             },
-                            new Client {
-                            ClientName = "vuex-oidc-sample",
-                            ClientId = "vuex-oidc",
-                            AccessTokenType = AccessTokenType.Reference,
-                            // RequireConsent = false,
-                            AccessTokenLifetime = 330, // 330 seconds, default 60 minutes
-                            IdentityTokenLifetime = 300,
-                            RequireClientSecret = false,
-                            AllowedGrantTypes = GrantTypes.Hybrid,
-                            RequirePkce = true,
-                            AllowAccessTokensViaBrowser = true,
-                            RedirectUris = new List<string> {
-                            "http://localhost:44357/oidc-callback",
-                            "http://localhost:44357/silent-renew"
-                            },
-                            PostLogoutRedirectUris = new List<string> {
-                            "http://localhost:44357/post-logout"
-                            },
-                            AllowedCorsOrigins = new List<string> {
-                            "http://localhost:44357"
-                            },
-                            AllowedScopes = new List<string> {
-                            "openid",
-                            "dataEventRecords",
-                            "dataeventrecordsscope",
-                            "role",
-                            "profile",
-                            "email"
-                            }
-                            }
+                new Client {
+                    ClientName = "vuex-oidc-sample",
+                    ClientId = "vuex-oidc",
+                    AccessTokenType = AccessTokenType.Reference,
+                    // RequireConsent = false,
+                    AccessTokenLifetime = 330, // 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 300,
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequirePkce = true,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string> {
+                    "http://localhost:5002/oidc-popup-callback"
+                    },
+                    PostLogoutRedirectUris = new List<string> {
+                    "http://localhost:5002/post-logout"
+                    },
+                    AllowedCorsOrigins = new List<string> {
+                    "http://localhost:5002"
+                    },
+                    AllowedScopes = new List<string> {
+                    "openid",
+                    "dataEventRecords",
+                    "dataeventrecordsscope",
+                    "role",
+                    "profile",
+                    "email"
+                    }
+                    }
             };
         }
     }
