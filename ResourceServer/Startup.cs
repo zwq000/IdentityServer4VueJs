@@ -33,9 +33,10 @@ namespace AspNet5SQLite
                     builder =>
                     {
                         builder
-                            .AllowCredentials()
-                            .WithOrigins(
-                                "https://localhost:44356", "https://localhost:44357")
+                            .AllowAnyOrigin()
+                            // .AllowCredentials()
+                            // .WithOrigins(
+                            //     "https://localhost:44356", "https://localhost:44357")
                             .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
@@ -50,7 +51,8 @@ namespace AspNet5SQLite
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
               .AddIdentityServerAuthentication(options =>
               {
-                  options.Authority = "https://localhost:44356/";
+                  options.RequireHttpsMetadata = false;
+                  options.Authority = "http://localhost:44356/";
                   options.ApiName = "dataEventRecords";
                   options.ApiSecret = "dataEventRecordsSecret";
               });

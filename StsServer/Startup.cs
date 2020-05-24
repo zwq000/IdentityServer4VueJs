@@ -81,9 +81,10 @@ namespace StsServerIdentity
                     builder =>
                     {
                         builder
-                            .AllowCredentials()
-                            .WithOrigins("https://localhost:44356", "https://localhost:44357")
-                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            //.AllowCredentials()
+                            .AllowAnyOrigin()
+                            //.WithOrigins("http://localhost:44356", "http://localhost:44357")
+                            //.SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
                     });
@@ -124,7 +125,8 @@ namespace StsServerIdentity
                             new CultureInfo("en-US"),
                             new CultureInfo("de-CH"),
 							new CultureInfo("fr-CH"),
-							new CultureInfo("it-CH")
+							new CultureInfo("it-CH"),
+                            new CultureInfo("zh-CN")
                         };
 
                     options.DefaultRequestCulture = new RequestCulture(culture: "de-CH", uiCulture: "de-CH");
@@ -180,7 +182,7 @@ namespace StsServerIdentity
 
             app.UseCors("AllowAllOrigins");
 
-            app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
+            //app.UseHsts(hsts => hsts.MaxAge(365).IncludeSubdomains());
             //app.UseXContentTypeOptions();
             //app.UseReferrerPolicy(opts => opts.NoReferrer());
             //app.UseXXssProtection(options => options.EnabledWithBlockMode());
@@ -193,7 +195,7 @@ namespace StsServerIdentity
                 .StyleSources(s => s.UnsafeInline())
                 .FontSources(s => s.Self())
                 .FrameAncestors(s => s.Self())
-                .FrameAncestors(s => s.CustomSources("https://localhost:44356", "https://localhost:44357"))
+                .FrameAncestors(s => s.CustomSources("http://localhost:44356", "http://localhost:44357"))
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
                 .ScriptSources(s => s.Self())
