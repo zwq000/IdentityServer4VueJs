@@ -26,26 +26,26 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import AuthService from "@/services/auth.service";
+import { Component, Vue } from 'vue-property-decorator';
+import AuthService from '@/services/auth.service';
 
-import axios from "axios";
+import axios from 'axios';
 
 const auth = new AuthService();
 
 @Component({
-  components: {}
+  components: {},
 })
 export default class Home extends Vue {
-  public currentUser: string | undefined = "";
-  public identityInfo: Object = {};
+  public currentUser: string | undefined = '';
+  public identityInfo: object = {};
   public accessTokenExpired: boolean | undefined = false;
   public isLoggedIn: boolean = false;
 
   public dataEventRecordsItems: [] = [];
 
   get username(): string {
-    return this.currentUser || "No User";
+    return this.currentUser || 'No User';
   }
 
   public login() {
@@ -57,7 +57,7 @@ export default class Home extends Vue {
   }
 
   public mounted() {
-    auth.getUser().then(user => {
+    auth.getUser().then((user) => {
       if (user) {
         this.currentUser = user.profile.name;
         this.accessTokenExpired = user.expired;
@@ -68,9 +68,9 @@ export default class Home extends Vue {
 
   public getProtectedApiData() {
     auth.getAccessToken().then((userToken: string) => {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${userToken}`;
       axios
-        .get("http://localhost:44355/api/DataEventRecords/")
+        .get('http://localhost:44355/api/DataEventRecords/')
         .then((response: any) => {
           this.dataEventRecordsItems = response.data;
         })
@@ -82,9 +82,9 @@ export default class Home extends Vue {
 
   public getIdentityInfo() {
     auth.getAccessToken().then((userToken: string) => {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${userToken}`;
       axios
-        .get("http://localhost:44355/identity")
+        .get('http://localhost:44355/identity')
         .then((response: any) => {
           this.identityInfo = response.data;
         })
